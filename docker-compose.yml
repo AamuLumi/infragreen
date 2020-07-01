@@ -1,0 +1,9 @@
+version: '3'
+services:
+  harold:
+    build: ./harold
+    environment:
+      - PORT=19100
+      - DISCORD_TOKEN
+    ports:
+      - "80:19100"
