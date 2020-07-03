@@ -58,7 +58,7 @@ services:
     networks:
       - proxy-tier
     depends_on:
-      - omgwtfssl
+      - letsencrypt
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -67,7 +67,6 @@ services:
       - vhost.d:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    volumes-from: proxy
     environment:
       - DEFAULT_EMAIL
     networks:
