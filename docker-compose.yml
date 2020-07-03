@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   harold:
     build: ./harold
@@ -14,9 +14,8 @@ services:
       - db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD
-      - MYSQL_PASSWORD
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
+    env_file:
+      - db.env
 
   app:
     image: nextcloud:fpm-alpine
@@ -37,8 +36,6 @@ services:
       - nextcloud:/var/www/html:ro
     environment:
       - VIRTUAL_HOST=altaria.aamulumi.info
-      - VIRTUAL_PROTO=https
-      - VIRTUAL_PORT=443
     depends_on:
       - app
     networks:
@@ -67,11 +64,11 @@ services:
     volumes:
       - certs:/certs
     environment:
-      - SSL_SUBJECT=servhostname.local
+      - SSL_SUBJECT=altaria.aamulumi.info.local
       - CA_SUBJECT=altaria@aamulumi.info
-      - SSL_KEY=/certs/servhostname.local.key
-      - SSL_CSR=/certs/servhostname.local.csr
-      - SSL_CERT=/certs/servhostname.local.crt
+      - SSL_KEY=/certs/altaria.aamulumi.info.key
+      - SSL_CSR=/certs/altaria.aamulumi.info.csr
+      - SSL_CERT=/certs/altaria.aamulumi.info.crt
     networks:
       - proxy-tier
 
