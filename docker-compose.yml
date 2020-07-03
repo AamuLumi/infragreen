@@ -36,7 +36,7 @@ services:
     volumes:
       - nextcloud:/var/www/html:ro
     environment:
-      - VIRTUAL_HOST=cloud.aamulumi.info
+      - VIRTUAL_HOST=altaria.aamulumi.info
     depends_on:
       - app
     networks:
@@ -66,7 +66,7 @@ services:
       - certs:/certs
     environment:
       - SSL_SUBJECT=servhostname.local
-      - CA_SUBJECT=cloud@aamulumi.info
+      - CA_SUBJECT=altaria@aamulumi.info
       - SSL_KEY=/certs/servhostname.local.key
       - SSL_CSR=/certs/servhostname.local.csr
       - SSL_CERT=/certs/servhostname.local.crt
