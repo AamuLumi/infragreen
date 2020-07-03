@@ -37,6 +37,8 @@ services:
       - nextcloud:/var/www/html:ro
     environment:
       - VIRTUAL_HOST=altaria.aamulumi.info
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
     depends_on:
       - app
     networks:
