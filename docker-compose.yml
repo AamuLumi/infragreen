@@ -36,8 +36,10 @@ services:
       - nextcloud:/var/www/html:ro
     environment:
       - VIRTUAL_HOST=altaria.aamulumi.info
+      - LETSENCRYPT_HOST=altaria.aamulumi.info
     depends_on:
       - app
+      - proxy
     networks:
       - proxy-tier
       - default
@@ -58,17 +60,13 @@ services:
     depends_on:
       - omgwtfssl
 
-  omgwtfssl:
-    image: paulczar/omgwtfssl
-    restart: "no"
-    volumes:
-      - certs:/certs
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volume: 
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    volumes-from: proxy
     environment:
-      - SSL_SUBJECT=altaria.aamulumi.info.local
-      - CA_SUBJECT=altaria@aamulumi.info
-      - SSL_KEY=/certs/altaria.aamulumi.info.key
-      - SSL_CSR=/certs/altaria.aamulumi.info.csr
-      - SSL_CERT=/certs/altaria.aamulumi.info.crt
+      - DEFAULT_EMAIL
     networks:
       - proxy-tier
 
