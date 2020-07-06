@@ -27,6 +27,8 @@ services:
     environment:
       - MYSQL_HOST=db
       - OVERWRITEPROTOCOL=https
+      - OVERWRITEHOST=altaria.aamulumi.info
+      - TRUSTED_PROXIES=https://altaria.aamulumi.info
     env_file:
       - db.env
     depends_on:
