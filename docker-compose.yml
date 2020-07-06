@@ -47,7 +47,7 @@ services:
       - proxy
     networks:
       - proxy-tier
-      - default
+      - nextcloud-tier
 
   proxy:
     build: ./proxy
