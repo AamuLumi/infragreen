@@ -9,7 +9,7 @@ RUN apk update && \
 
 RUN npm install -g npm@^6.0.0
 
-COPY . .
+COPY ./harold .
 
 RUN npm install
 
