@@ -7,7 +7,7 @@ services:
       - DISCORD_TOKEN
 
   db:
-    image: mariadb
+    image: mariadb:10.3
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
@@ -16,6 +16,8 @@ services:
       - MYSQL_ROOT_PASSWORD
     env_file:
       - db.env
+    networks:
+      - nextcloud-tier
 
   app:
     image: nextcloud:fpm-alpine
@@ -24,10 +26,13 @@ services:
       - nextcloud:/var/www/html
     environment:
       - MYSQL_HOST=db
+      - OVERWRITEPROTOCOL=https
     env_file:
       - db.env
     depends_on:
       - db
+    networks:
+      - nextcloud-tier
 
   web:
     build: ./web
@@ -84,3 +89,4 @@ volumes:
 
 networks:
   proxy-tier:
+  nextcloud-tier:
