@@ -1,11 +1,5 @@
 version: "3"
 services:
-  harold:
-    build: ./harold
-    environment:
-      - PORT=19100
-      - DISCORD_TOKEN
-
   db:
     image: mariadb:10.3
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
